@@ -1,23 +1,21 @@
-# Debian Package CPack Template
+# Argparse Library Debian Package
 
-This project contains a [CPack](https://cmake.org/cmake/help/latest/module/CPack.html) template to build a [Debian package](https://wiki.debian.org/Packaging) of external third-party [CMake](https://cmake.org/) projects.
-This project is created to simplify the deployment of third-party libraries/frameworks which are build using CMake but do not yet have an official Debian package to be used.
-This project works by including a third-party source code as a [Git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules), then including it as a [CMake subdirectory](https://cmake.org/cmake/help/latest/command/add_subdirectory.html), and last compile it as a Debian package.
+[![latest release](https://img.shields.io/github/v/release/threeal/libargparse-deb)](https://github.com/threeal/libargparse-deb/releases)
+[![repository size](https://img.shields.io/github/repo-size/threeal/libargparse-deb)](https://github.com/threeal/libargparse-deb/pulse)
+[![license](https://img.shields.io/github/license/threeal/libargparse-deb)](./LICENSE)
+
+This project contains a [CPack](https://cmake.org/cmake/help/latest/module/CPack.html) build workspace of the [Argparse](https://github.com/p-ranav/argparse) library.
+This project is created to simplify the deployment of the library as a [Debian package](https://wiki.debian.org/Packaging).
 
 ## Usage
 
-### Including the Third-party Source Code
+### Updating the Source Code
 
-- Clone the third-party source code repository as a Git submodule.
-  ```bash
-  $ git submodule add https://github.com/user/something
-  ```
-  > Optionally, you could specify the branch/tag to be used using `-b` option, see [this](https://git-scm.com/docs/git-submodule#Documentation/git-submodule.txt--bltbranchgt).
-- If the Git submodule already exists, initialize it and pull the latest commits.
+- Initialize the submodule and pull the latest commits.
   ```bash
   $ git submodule update --init --recursive
   ```
-- Modify the CPack configuration in the [CMakeLists.txt](./CMakeLists.txt) according to the current third-party source code information.
+- Modify the CPack configuration in the [CMakeLists.txt](./CMakeLists.txt) according to the current source code information.
   > See [this guide](https://cmake.org/cmake/help/latest/cpack_gen/deb.html) for more information on CPack configuration for Debian package.
 
 ### Building the Project
@@ -29,14 +27,14 @@ This project works by including a third-party source code as a [Git submodule](h
   ```
 - Configure the CMake with the following options.
   ```bash
-  $ cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr ..
+  $ cmake -DCMAKE_INSTALL_PREFIX=/usr ..
   ```
 - Build the project.
   ```bash
   $ make
   ```
   > Optionally, you could speed up the build process by specifying the parallel job using `-j` option, see [this](https://www.gnu.org/software/make/manual/html_node/Parallel.html).
-- Create the debian package using cpack.
+- Create the Debian package using CPack.
   ```bash
   $ cpack
   ```
